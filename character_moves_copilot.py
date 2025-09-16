@@ -41,35 +41,52 @@ def move_to_start():
 
 def move_rectangle():
     move_to_start()
+    # 각 변의 길이 계산
+    right_len = rect_right - start_x
+    top_len = rect_top - start_y
+    left_len = rect_right - rect_left
+    bottom_len = rect_top - start_y
+    # 각 변을 100프레임으로 이동
+    steps = 100
     # 오른쪽
-    for x in range(start_x, rect_right + 1, 10):
+    for t in range(steps + 1):
+        x = start_x + (rect_right - start_x) * t / steps
+        y = start_y
         clear_canvas_now()
         grass.draw_now(400, 30)
-        character.draw_now(x, start_y)
+        character.draw_now(x, y)
         delay(0.01)
     # 위
-    for y in range(start_y, rect_top + 1, 10):
+    for t in range(steps + 1):
+        x = rect_right
+        y = start_y + (rect_top - start_y) * t / steps
         clear_canvas_now()
         grass.draw_now(400, 30)
-        character.draw_now(rect_right, y)
+        character.draw_now(x, y)
         delay(0.01)
     # 왼쪽
-    for x in range(rect_right, rect_left - 1, -10):
+    for t in range(steps + 1):
+        x = rect_right - (rect_right - rect_left) * t / steps
+        y = rect_top
         clear_canvas_now()
         grass.draw_now(400, 30)
-        character.draw_now(x, rect_top)
+        character.draw_now(x, y)
         delay(0.01)
     # 아래
-    for y in range(rect_top, start_y - 1, -10):
+    for t in range(steps + 1):
+        x = rect_left
+        y = rect_top - (rect_top - start_y) * t / steps
         clear_canvas_now()
         grass.draw_now(400, 30)
-        character.draw_now(rect_left, y)
+        character.draw_now(x, y)
         delay(0.01)
     # 시작점으로 복귀
-    for x in range(rect_left, start_x + 1, 10):
+    for t in range(steps + 1):
+        x = rect_left + (start_x - rect_left) * t / steps
+        y = start_y
         clear_canvas_now()
         grass.draw_now(400, 30)
-        character.draw_now(x, start_y)
+        character.draw_now(x, y)
         delay(0.01)
 
 def move_triangle():
@@ -82,34 +99,35 @@ def move_triangle():
     p1 = (start_x - dx, start_y)
     p2 = (start_x, start_y + dy)
     p3 = (start_x + dx, start_y)
+    steps = 100
     # p0 -> p1 (왼쪽)
-    for t in range(0, 101):
-        x = p0[0] + (p1[0] - p0[0]) * t / 100
-        y = p0[1] + (p1[1] - p0[1]) * t / 100
+    for t in range(steps + 1):
+        x = p0[0] + (p1[0] - p0[0]) * t / steps
+        y = p0[1] + (p1[1] - p0[1]) * t / steps
         clear_canvas_now()
         grass.draw_now(400, 30)
         character.draw_now(x, y)
         delay(0.01)
     # p1 -> p2 (위쪽)
-    for t in range(0, 101):
-        x = p1[0] + (p2[0] - p1[0]) * t / 100
-        y = p1[1] + (p2[1] - p1[1]) * t / 100
+    for t in range(steps + 1):
+        x = p1[0] + (p2[0] - p1[0]) * t / steps
+        y = p1[1] + (p2[1] - p1[1]) * t / steps
         clear_canvas_now()
         grass.draw_now(400, 30)
         character.draw_now(x, y)
         delay(0.01)
     # p2 -> p3 (오른쪽)
-    for t in range(0, 101):
-        x = p2[0] + (p3[0] - p2[0]) * t / 100
-        y = p2[1] + (p3[1] - p2[1]) * t / 100
+    for t in range(steps + 1):
+        x = p2[0] + (p3[0] - p2[0]) * t / steps
+        y = p2[1] + (p3[1] - p2[1]) * t / steps
         clear_canvas_now()
         grass.draw_now(400, 30)
         character.draw_now(x, y)
         delay(0.01)
     # p3 -> p0 (중앙)
-    for t in range(0, 101):
-        x = p3[0] + (p0[0] - p3[0]) * t / 100
-        y = p3[1] + (p0[1] - p3[1]) * t / 100
+    for t in range(steps + 1):
+        x = p3[0] + (p0[0] - p3[0]) * t / steps
+        y = p3[1] + (p0[1] - p3[1]) * t / steps
         clear_canvas_now()
         grass.draw_now(400, 30)
         character.draw_now(x, y)
@@ -117,19 +135,17 @@ def move_triangle():
 
 def move_circle():
     move_to_start()
-    # 원 중심을 start_x, start_y + 120으로, 반지름을 110으로 설정 (조금 더 큰 원)
     cx = start_x
     cy = start_y + 120
     r = 110
-    # cy + r이 y_max를 넘지 않도록 보정
     if cy + r > y_max:
         r = y_max - cy
-    # 시작점이 원의 아래쪽(270도), 시계방향 한 바퀴
-    for deg in range(270, 270 - 360, -3):
+    steps = 400  # 원은 400프레임(사각형 전체와 비슷하게)
+    for i in range(steps):
+        deg = 270 - (360 * i / steps)
         rad = math.radians(deg)
         x = cx + r * math.cos(rad)
         y = cy + r * math.sin(rad)
-        # 경계 체크: 화면 밖/grass 아래로 안 나가게
         x = max(x_min, min(x, x_max))
         y = max(y_min, min(y, y_max))
         clear_canvas_now()
