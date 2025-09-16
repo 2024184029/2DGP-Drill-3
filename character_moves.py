@@ -64,6 +64,8 @@ def move_circle():
 
         draw_boy(x, y)
 
+    draw_boy(400, 80)
+
 def move_triangle():
     print("Move triangle")
 
@@ -97,8 +99,8 @@ def draw_boy(x: float, y: float):
 
 
 while True:
-    # move_rectangle()
-    # move_triangle()
+    move_rectangle()
+    move_triangle()
     move_circle()
 
 close_canvas()
