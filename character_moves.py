@@ -65,7 +65,23 @@ def move_triangle():
 
     draw_boy(400, 80)
 
-    move_bottom()
+    for x in range(400, 30, -5):
+        draw_boy(x, 80)
+
+    side1 = (470) / (370)
+    for x in range(30, 400, 5):
+        y = 80 + side1 * (x - 30)
+        draw_boy(x, y)
+
+    side2 = (-470) / (370)
+    for x in range(400, 770, 5):
+        y = 550 + side2 * (x - 400)
+        draw_boy(x, y)
+
+    for x in range(770, 400, -5):
+        draw_boy(x, 80)
+
+    draw_boy(400, 80)
 
 
 
@@ -77,9 +93,8 @@ def draw_boy(x: float, y: float):
 
 
 while True:
-    # move_circle()
     move_rectangle()
-
-    break
+    move_triangle()
+    move_circle()
 
 close_canvas()
