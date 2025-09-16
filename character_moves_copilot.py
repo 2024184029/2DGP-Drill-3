@@ -30,7 +30,6 @@ dy = min(150, y_max - start_y)
 
 max_r = min(start_x - x_min, x_max - start_x, y_max - (start_y + c_height // 2))
 
-
 def move_to_start():
     clear_canvas_now()
     grass.draw_now(400, 30)
