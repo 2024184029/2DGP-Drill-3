@@ -56,12 +56,12 @@ def move_rectangle():
         character.draw_now(x, y)
         delay(0.01)
 
-    for t in range(steps + 1):
-        x = rect_right - (rect_right - rect_left) * t / steps
+    for t in range(2 * steps + 1):
+        x = rect_right - (rect_right - rect_left) * t / (2 * steps)
         y = rect_top
-        clear_canvas_now()
-        grass.draw_now(400, 30)
-        character.draw_now(x, y)
+        clear_canvas_now();
+        grass.draw_now(400, 30);
+        character.draw_now(x, y);
         delay(0.01)
 
     for t in range(steps + 1):
