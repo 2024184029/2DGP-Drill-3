@@ -53,8 +53,12 @@ def move_rectangle():
 
 def move_circle():
     print("Move circle")
+
+    draw_boy(400, 80)
+
     r = 200
-    for deg in range(0, 360):
+    for i in range(0, 360):
+        deg = 270 - i
         x = r * math.cos(math.radians(deg)) + 400
         y = r * math.sin(math.radians(deg)) + 300
 
@@ -93,8 +97,8 @@ def draw_boy(x: float, y: float):
 
 
 while True:
-    move_rectangle()
-    move_triangle()
+    # move_rectangle()
+    # move_triangle()
     move_circle()
 
 close_canvas()
