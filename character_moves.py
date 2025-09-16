@@ -6,9 +6,6 @@ open_canvas()
 boy = load_image('character.png')
 grass = load_image('grass.png')
 
-# 캐릭터 사각 운동, 삼각 운동, 원운동을 무한 반복
-# 점진적 개발에 따른 커밋이 이루어지면서 개발되고, 모든 기능을 만족하면 3점
-
 def move_top():
     print('Move top')
     for x in range(770, 30 - 1, -5):
