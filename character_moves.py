@@ -13,37 +13,42 @@ def move_top():
     print('Move top')
     for x in range(770, 30 - 1, -5):
         draw_boy(x, 550)
-    pass
 
 
 def move_right():
     print('Move right')
     for y in range(90, 550 + 1, 5):
         draw_boy(770, y)
-    pass
 
 
 def move_bottom():
     print('Move bottom')
     for x in range(30, 770 + 1, 5):
         draw_boy(x, 90)
-    pass
 
 
 def move_left():
     print('Move left')
     for y in range(550, 90 - 1, -5):
         draw_boy(30, y)
-    pass
 
 
 def move_rectangle():
     print("Move rectangle")
-    move_bottom()
+
+    draw_boy(400, 80)
+
+    for x in range(400 + 5, 770 + 1, 5):
+        draw_boy(x, 80)
+
     move_right()
+
     move_top()
+
     move_left()
-    pass
+
+    for x in range(30, 400, 5):
+        draw_boy(x, 80)
 
 
 def move_circle():
@@ -55,7 +60,13 @@ def move_circle():
 
         draw_boy(x, y)
 
-    pass
+def move_triangle():
+    print("Move triangle")
+
+    draw_boy(400, 80)
+
+    move_bottom()
+
 
 
 def draw_boy(x: float, y: float):
